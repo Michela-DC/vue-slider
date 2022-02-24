@@ -17,11 +17,11 @@
         <div id="container">
             <div class="slide-container">
                 <figure class="slide-wrapper">
-                    <!-- <img class="slide" src="img/01.jpg" alt=""> -->
+                    <img v-for="(item, i) in slides" :class ="[activeIndex === i ? 'active-slide' : '']"  class="slide" v-bind:src="item.image" alt="">
                 </figure>
                 <div class="img-info">
-                    <!-- <h3>Svizzera</h3>
-                    <h4>Lorem ipsum</h4> -->
+                    <h3 v-for="(item, i) in slides" :class ="[activeIndex === i ? 'active-slide' : '']"  class="img-title">{{ item.title }}</h3>
+                    <h4 v-for="(item, i) in slides" :class ="[activeIndex === i ? 'active-slide' : '']"  class="img-title">{{ item.description}} </h4>
                 </div>
             </div>
 
@@ -31,8 +31,8 @@
                 </button>
 
                 <div class="img-container">
-                    <!-- per assegnargli la classe: se activeIndex ha lo stesso valore dellíndice che cicla dentro l'array allora gli assegno la classe active -->
-                    <img v-for="(item, i) in slides" :class ="[activeIndex === i ? 'active' : 'not-active']"  class="thumbnail" v-bind:src="item.image" alt="">
+                    <!-- per assegnargli la classe: se activeIndex ha lo stesso valore dellíndice che cicla dentro l'array allora gli assegno la classe active altrimenti ha la classe not-active-->
+                    <img v-for="(item, i) in slides" :class ="[activeIndex === i ? 'active' : 'not-active' ]"  class="thumbnail" v-bind:src="item.image" alt="">
                 </div>
         
                 <button @click="down" id="btn-down">

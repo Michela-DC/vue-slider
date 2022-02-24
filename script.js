@@ -36,7 +36,6 @@ const container = new Vue({
             },  
         ],
 
-        className: 'active ',
         activeIndex: 0,
     },
 
