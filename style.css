@@ -83,14 +83,9 @@ main {
     display: block;
 } 
 
-.active{
+.active-thumbnail{
     position: relative;
     z-index: 8;
-}
-
-.not-active{
-    position: relative;
-    z-index: 0;
 }
 
 .active-slide{

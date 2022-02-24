@@ -37,6 +37,19 @@ const container = new Vue({
     },
 
     methods: {
+
+        activeThumbnail: function (arrayIndex){
+            if(this.activeIndex === arrayIndex){
+                return 'active-thumbnail';
+            }
+        },
+
+        activeSlide: function (arrayIndex){
+            if(this.activeIndex === arrayIndex){
+                return 'active-slide';
+            }
+        },
+
         down: function () {
 
             if (this.activeIndex < this.slides.length - 1){ 
@@ -46,7 +59,8 @@ const container = new Vue({
             // se l'indice diventa maggiore della lunghezza dell'array - 1 allora lo faccio ritornare a zero, ovvero alla posizione dell'aray in cui è l'immagine che ho messo per prima i alto
                 this.activeIndex = 0;
             }
-    },
+        },
+        
         up: function () {
 
             if ( this.activeIndex > 0){ 
