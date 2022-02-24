@@ -1,6 +1,3 @@
-// Partendo dal markup della versione svolta vanilla js con l’array di oggetti, rifare lo slider ma questa volta usando Vue.
-let index = 0;
-
 const container = new Vue({
     el: '#container',
     data: {
@@ -50,7 +47,6 @@ const container = new Vue({
                 this.activeIndex = 0;
             }
     },
-
         up: function () {
 
             if ( this.activeIndex > 0){ 
