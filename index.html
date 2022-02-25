@@ -14,26 +14,26 @@
 
     <main>
 
-        <div id="container">
-            <div class="slide-container">
+        <div id="app" class="container">
+            <div class="slide-container" @mouseenter="stopAutoplay" @mouseleave="startAutoplay">
                 <figure class="slide-wrapper">
-                    <img @click.prevent="play" v-for="(item, i) in slides" :class ="activeSlide(i)"  class="slide" v-bind:src="item.image" alt="">
+                    <!-- per assegnargli la classe: se activeIndex ha lo stesso valore dell'indice che cicla dentro l'array allora gli assegno la classe active -->
+                    <img v-for="(item, i) in slides" :class ="activeSlide(i)"  class="slide" v-bind:src="item.image" alt="">
                 </figure>
                 <div class="img-info">
-                    <!-- altro modo per assegnare la classe active-slide è usare l'operatore ternario direttamente nell'html -->
-                    <h3 v-for="(item, i) in slides" :class ="[activeIndex === i ? 'active-slide' : '']"  class="img-title">{{ item.title }}</h3>
-                    <h4 v-for="(item, i) in slides" :class ="[activeIndex === i ? 'active-slide' : '']"  class="img-title">{{ item.description}} </h4>
+                    <h3 class="img-title" v-for="(item, i) in slides" :class ="activeSlide(i)">{{ item.title }}</h3>
+                    <h5 class="img-title" v-for="(item, i) in slides" :class ="activeSlide(i)">{{ item.description}} </h5>
                 </div>
             </div>
-
+            
             <div class="thumbnails-container">
                 <button @click="up" id="btn-up">
                     <i class="fa-solid fa-chevron-up"></i>
                 </button>
-
-                <div class="img-container">
-                    <!-- per assegnargli la classe: se activeIndex ha lo stesso valore dellíndice che cicla dentro l'array allora gli assegno la classe active altrimenti ha la classe not-active-->
-                    <img v-for="(item, i) in slides" :class ="activeThumbnail(i)"  class="thumbnail" v-bind:src="item.image" alt="">
+                
+                <div class="img-container" v-for="(item, i) in slides" :class ="[activeIndex === i ? 'active-thumbnail' : '']" >
+                    <!-- altro modo per assegnare la classe active-slide è usare l'operatore ternario direttamente nell'html -->
+                    <img class="thumbnail" v-bind:src="item.image" @click="clickOnThumbnail(i)" alt="">
                 </div>
         
                 <button @click="down" id="btn-down">

@@ -1,5 +1,5 @@
-const container = new Vue({
-    el: '#container',
+const app = new Vue({
+    el: '#app',
     data: {
         slides: [
             {
@@ -34,24 +34,26 @@ const container = new Vue({
         ],
 
         activeIndex: 0,
+        className: 'active not-active',
+        clock: undefined, // serve un valore iniziale per far partire il l'interval, potevo metterlo anche a null.
+
     },
 
     methods: {
 
-        activeThumbnail: function (arrayIndex){
-            if(this.activeIndex === arrayIndex){
-                return 'active-thumbnail';
+        activeThumbnail: function (index){
+            if(this.activeIndex === index){
+                return 'active';
             }
         },
 
-        activeSlide: function (arrayIndex){
-            if(this.activeIndex === arrayIndex){
+        activeSlide: function (index){
+            if(this.activeIndex === index){
                 return 'active-slide';
             }
         },
 
         down: function () {
-
             if (this.activeIndex < this.slides.length - 1){ 
             // se l'indice è minore della lunghezza dell'array - 1 (ovvero minore delle posibili posizione dentro l'array, in questo caso 4) allora incremento l'indice
                 this.activeIndex ++;
@@ -60,9 +62,7 @@ const container = new Vue({
                 this.activeIndex = 0;
             }
         },
-        
         up: function () {
-
             if ( this.activeIndex > 0){ 
             //decremento l'activeIndex per stabilire la nuova thumbnail e la nuova slide corrente
                 this.activeIndex --;
@@ -74,9 +74,27 @@ const container = new Vue({
             }
         },
 
-    }
-})
+        clickOnThumbnail: function(index) {
+            // al click sulla thumbnail activeIndex diventa uguale all'indice della posizione dell'immagine nell'array
+            this.activeIndex = index;
+        },
 
-console.log(container);
+        // funzione che ferma l'autoplay e assegnadola a @mouseenter allora l'autoplay del carosello si fermerà quando ci vado sopra con il mouse
+        stopAutoplay: function() {
+            clearInterval(this.clock);
+            console.log(this.clock);
+        },
+
+        // funzione che ferma l'autoplay e assegnadola a @mouseleave allora l'autoplay del carosello riprenderà quando tolgo il mouse dalla slide
+        startAutoplay: function (){
+            this.clock = setInterval (this.down, 3000);
+        }
+    },
+    // uso un hook di vuejs --> vedi lifecycle diagram in https://v2.vuejs.org/v2/guide/instance.html#Lifecycle-Diagram
+    mounted() {
+        this.startAutoplay();
+    },
+
+})
 
 
