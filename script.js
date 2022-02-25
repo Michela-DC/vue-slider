@@ -85,7 +85,7 @@ const app = new Vue({
             console.log(this.clock);
         },
 
-        // funzione che ferma l'autoplay e assegnadola a @mouseleave allora l'autoplay del carosello riprenderà quando tolgo il mouse dalla slide
+        // funzione che fa ripartire l'autoplay e assegnadola a @mouseleave allora l'autoplay del carosello riprenderà quando tolgo il mouse dalla slide
         startAutoplay: function (){
             this.clock = setInterval (this.down, 3000);
         }
